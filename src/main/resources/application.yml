@@ -1,0 +1,58 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /ec
+
+spring:
+  main:
+    allow-bean-definition-overriding: true
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/emotional_companionship?useUnicode=true&characterEncoding=utf-8&useSSL=false&allowPublicKeyRetrieval=true
+    username: root
+    password: 123456
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+  cache:
+    type: redis
+  redis:
+    host: localhost
+    port: 6379
+    database: 0
+    timeout: 60000
+  security:
+    basic:
+      path: /swagger-ui.html
+      enabled: true
+    user:
+      name: admin
+      password: admin
+
+# Swagger 2.x 配置
+springfox:
+  documentation:
+    enabled: true
+    auto-startup: true
+    swagger:
+      v2:
+        path: /api-docs
+    swagger-ui:
+      enabled: true
+
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.emotional.companionship.entity
+  configuration:
+    map-underscore-to-camel-case: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+jwt:
+  secret: emotional_companionship_secret_key_for_jwt_token_generation_and_validation
+  expiration: 86400000  # 24小时，单位：毫秒
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
