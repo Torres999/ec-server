@@ -1,6 +1,6 @@
 package com.emotional.companionship.controller;
 
-import com.emotional.companionship.common.ApiResponse;
+import com.emotional.companionship.common.Result;
 import com.emotional.companionship.dto.ChatSessionDTO;
 import com.emotional.companionship.dto.request.EndChatRequest;
 import com.emotional.companionship.dto.request.StartChatRequest;
@@ -30,21 +30,21 @@ public class ChatController {
 
     @PostMapping("/start")
     @ApiOperation("开始视频对话")
-    public ApiResponse<ChatSessionDTO> startChat(
+    public Result<ChatSessionDTO> startChat(
             @ApiParam(value = "开始视频对话请求", required = true) @Valid @RequestBody StartChatRequest request) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String userId = authentication.getName();
         ChatSessionDTO response = chatSessionService.startChat(request, userId);
-        return ApiResponse.success("会话创建成功", response);
+        return Result.success("会话创建成功", response);
     }
 
     @PostMapping("/end")
     @ApiOperation("结束视频对话")
-    public ApiResponse<ChatSessionDTO> endChat(
+    public Result<ChatSessionDTO> endChat(
             @ApiParam(value = "结束视频对话请求", required = true) @Valid @RequestBody EndChatRequest request) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String userId = authentication.getName();
         ChatSessionDTO response = chatSessionService.endChat(request, userId);
-        return ApiResponse.success("会话已结束", response);
+        return Result.success("会话已结束", response);
     }
 } 

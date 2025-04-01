@@ -1,6 +1,6 @@
 package com.emotional.companionship.exception;
 
-import com.emotional.companionship.common.ApiResponse;
+import com.emotional.companionship.common.Result;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.AccessDeniedException;
@@ -28,7 +28,7 @@ public class GlobalExceptionHandler {
      */
     @ExceptionHandler({MethodArgumentNotValidException.class, BindException.class})
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public ApiResponse<?> handleValidationException(Exception e) {
+    public Result<?> handleValidationException(Exception e) {
         List<FieldError> fieldErrors;
         if (e instanceof MethodArgumentNotValidException) {
             fieldErrors = ((MethodArgumentNotValidException) e).getBindingResult().getFieldErrors();
@@ -40,7 +40,7 @@ public class GlobalExceptionHandler {
                 .map(error -> error.getField() + ": " + error.getDefaultMessage())
                 .collect(Collectors.joining(", "));
 
-        return ApiResponse.error(message);
+        return Result.badRequest(message);
     }
 
     /**
@@ -48,8 +48,8 @@ public class GlobalExceptionHandler {
      */
     @ExceptionHandler(AuthenticationException.class)
     @ResponseStatus(HttpStatus.UNAUTHORIZED)
-    public ApiResponse<?> handleAuthenticationException(AuthenticationException e) {
-        return ApiResponse.error("认证失败：" + e.getMessage());
+    public Result<?> handleAuthenticationException(AuthenticationException e) {
+        return Result.unauthorized("认证失败：" + e.getMessage());
     }
 
     /**
@@ -57,8 +57,8 @@ public class GlobalExceptionHandler {
      */
     @ExceptionHandler(AccessDeniedException.class)
     @ResponseStatus(HttpStatus.FORBIDDEN)
-    public ApiResponse<?> handleAccessDeniedException(AccessDeniedException e) {
-        return ApiResponse.error("没有权限访问该资源");
+    public Result<?> handleAccessDeniedException(AccessDeniedException e) {
+        return Result.forbidden("没有权限访问该资源");
     }
 
     /**
@@ -66,8 +66,8 @@ public class GlobalExceptionHandler {
      */
     @ExceptionHandler(BusinessException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public ApiResponse<?> handleBusinessException(BusinessException e) {
-        return ApiResponse.error(e.getMessage());
+    public Result<?> handleBusinessException(BusinessException e) {
+        return Result.badRequest(e.getMessage());
     }
 
     /**
@@ -75,8 +75,8 @@ public class GlobalExceptionHandler {
      */
     @ExceptionHandler(Exception.class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-    public ApiResponse<?> handleException(Exception e) {
+    public Result<?> handleException(Exception e) {
         log.error("系统异常", e);
-        return ApiResponse.error("服务开小差了，请稍后重试");
+        return Result.serverError("服务开小差了，请稍后重试");
     }
 } 
