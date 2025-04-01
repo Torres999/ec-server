@@ -50,7 +50,7 @@ public class JwtTokenProviderTest {
         ReflectionTestUtils.setField(jwtTokenProvider, "key", key);
         
         // 创建测试普通用户
-        testUserDetails = new User("testuser", "password", new ArrayList<>());
+        testUserDetails = new User("wx_111222333", "password", new ArrayList<>());
         
         // 创建测试管理员用户
         Collection<GrantedAuthority> authorities = Arrays.asList(
