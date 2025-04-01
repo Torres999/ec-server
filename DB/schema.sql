@@ -1,3 +1,8 @@
+-- 创建数据库
+CREATE DATABASE IF NOT EXISTS ec_server DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+
+USE ec_server;
+
 -- 用户表
 CREATE TABLE IF NOT EXISTS `user` (
   `id` VARCHAR(64) NOT NULL COMMENT '用户唯一标识',
