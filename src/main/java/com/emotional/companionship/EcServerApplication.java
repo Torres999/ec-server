@@ -30,21 +30,6 @@ public class EcServerApplication {
     
     /**
      * 解决Springfox与Spring Boot 2.7.x的兼容性问题
-     * Spring Boot 2.7使用PathPatternParser作为默认路径匹配器，但Springfox 2.9.2不兼容它
-     */
-    @Bean
-    public WebMvcConfigurer webMvcConfigurer() {
-        return new WebMvcConfigurer() {
-            @Override
-            public void configurePathMatch(PathMatchConfigurer configurer) {
-                configurer.setUseTrailingSlashMatch(true);
-                configurer.setUseRegisteredSuffixPatternMatch(true);
-            }
-        };
-    }
-    
-    /**
-     * 解决Springfox与Spring Boot 2.7.x的兼容性问题
      * 修复documentationPluginsBootstrapper的空指针异常
      */
     @Bean
