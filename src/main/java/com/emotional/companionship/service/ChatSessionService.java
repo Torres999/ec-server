@@ -1,6 +1,8 @@
 package com.emotional.companionship.service;
 
-import com.emotional.companionship.dto.ChatSessionResponseDTO;
+import com.emotional.companionship.dto.ChatSessionDTO;
+import com.emotional.companionship.dto.request.EndChatRequest;
+import com.emotional.companionship.dto.request.StartChatRequest;
 import com.emotional.companionship.entity.ChatSession;
 
 /**
@@ -9,14 +11,14 @@ import com.emotional.companionship.entity.ChatSession;
 public interface ChatSessionService {
 
     /**
-     * 创建新的聊天会话
+     * 开始视频对话
      */
-    ChatSessionResponseDTO startChatSession(String digitalHumanId, String userId);
+    ChatSessionDTO startChat(StartChatRequest request, String userId);
 
     /**
-     * 结束聊天会话
+     * 结束视频对话
      */
-    ChatSessionResponseDTO endChatSession(String sessionId, String userId);
+    ChatSessionDTO endChat(EndChatRequest request, String userId);
 
     /**
      * 获取会话详情
@@ -39,7 +41,7 @@ public interface ChatSessionService {
     ChatSession getOngoingSession(String userId);
 
     /**
-     * 获取用户的总聊天分钟数
+     * 获取用户的总聊天时长（分钟）
      */
     int getTotalChatMinutes(String userId);
 

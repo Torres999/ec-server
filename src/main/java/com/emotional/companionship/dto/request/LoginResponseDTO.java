@@ -1,5 +1,6 @@
-package com.emotional.companionship.dto;
+package com.emotional.companionship.dto.request;
 
+import com.emotional.companionship.dto.UserDTO;
 import lombok.Data;
 
 /**

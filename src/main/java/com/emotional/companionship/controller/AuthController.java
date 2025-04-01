@@ -1,7 +1,7 @@
 package com.emotional.companionship.controller;
 
-import com.emotional.companionship.dto.LoginResponseDTO;
-import com.emotional.companionship.dto.Result;
+import com.emotional.companionship.dto.request.LoginResponseDTO;
+import com.emotional.companionship.common.Result;
 import com.emotional.companionship.service.UserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;

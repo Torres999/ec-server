@@ -1,7 +1,6 @@
-package com.emotional.companionship.dto;
+package com.emotional.companionship.dto.request;
 
 import lombok.Data;
-import java.util.Date;
 
 /**
  * 聊天会话响应DTO

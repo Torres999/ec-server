@@ -3,6 +3,7 @@ package com.emotional.companionship.mapper;
 import com.emotional.companionship.entity.ChatSession;
 import org.apache.ibatis.annotations.*;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -15,13 +16,13 @@ public interface ChatSessionMapper {
      * 根据ID查询会话
      */
     @Select("SELECT * FROM chat_session WHERE id = #{id}")
-    ChatSession findById(@Param("id") String id);
+    ChatSession selectById(@Param("id") String id);
 
     /**
      * 根据用户ID查询会话列表
      */
     @Select("SELECT * FROM chat_session WHERE user_id = #{userId} ORDER BY start_time DESC")
-    List<ChatSession> findByUserId(@Param("userId") String userId);
+    List<ChatSession> selectByUserId(@Param("userId") String userId);
 
     /**
      * 查询用户与特定数字人的会话列表
@@ -52,11 +53,23 @@ public interface ChatSessionMapper {
      * 结束会话
      */
     @Update("UPDATE chat_session SET end_time = #{endTime}, duration = #{duration}, status = 'ended', update_time = NOW() WHERE id = #{id}")
-    int endSession(@Param("id") String id, @Param("endTime") java.util.Date endTime, @Param("duration") Integer duration);
+    int endSession(@Param("id") String id, @Param("endTime") Date endTime, @Param("duration") int duration);
 
     /**
      * 计算用户的总聊天时间(分钟)
      */
     @Select("SELECT IFNULL(SUM(duration), 0) FROM chat_session WHERE user_id = #{userId} AND status = 'ended'")
     int getTotalChatDurationByUserId(@Param("userId") String userId);
+
+    /**
+     * 根据数字人ID查询会话列表
+     */
+    @Select("SELECT * FROM chat_session WHERE digital_human_id = #{digitalHumanId} ORDER BY start_time DESC")
+    List<ChatSession> selectByDigitalHumanId(@Param("digitalHumanId") String digitalHumanId);
+
+    /**
+     * 删除会话
+     */
+    @Delete("DELETE FROM chat_session WHERE id = #{id}")
+    int deleteById(@Param("id") String id);
 } 

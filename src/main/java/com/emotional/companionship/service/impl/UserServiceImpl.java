@@ -1,6 +1,6 @@
 package com.emotional.companionship.service.impl;
 
-import com.emotional.companionship.dto.LoginResponseDTO;
+import com.emotional.companionship.dto.request.LoginResponseDTO;
 import com.emotional.companionship.dto.UserDTO;
 import com.emotional.companionship.dto.UserDetailDTO;
 import com.emotional.companionship.entity.User;
@@ -15,7 +15,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.StringUtils;
 import org.springframework.web.client.RestTemplate;
 
 import java.math.BigDecimal;

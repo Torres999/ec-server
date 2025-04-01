@@ -1,4 +1,4 @@
-package com.emotional.companionship.dto;
+package com.emotional.companionship.common;
 
 import lombok.Data;
 

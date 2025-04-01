@@ -1,6 +1,6 @@
 package com.emotional.companionship.controller;
 
-import com.emotional.companionship.dto.Result;
+import com.emotional.companionship.common.Result;
 import com.emotional.companionship.dto.UserDTO;
 import com.emotional.companionship.dto.UserDetailDTO;
 import com.emotional.companionship.service.UserService;

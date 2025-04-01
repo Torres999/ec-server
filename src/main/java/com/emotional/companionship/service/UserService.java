@@ -1,6 +1,6 @@
 package com.emotional.companionship.service;
 
-import com.emotional.companionship.dto.LoginResponseDTO;
+import com.emotional.companionship.dto.request.LoginResponseDTO;
 import com.emotional.companionship.dto.UserDTO;
 import com.emotional.companionship.dto.UserDetailDTO;
 import com.emotional.companionship.entity.User;

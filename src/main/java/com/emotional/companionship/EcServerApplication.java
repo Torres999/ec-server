@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- * 健康管理小程序后端服务主应用类
+ * 高端情感陪伴App后端服务主应用类
  */
 @SpringBootApplication
 @MapperScan("com.emotional.companionship.mapper")

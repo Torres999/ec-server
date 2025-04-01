@@ -1,7 +1,7 @@
 package com.emotional.companionship.security;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.emotional.companionship.dto.Result;
+import com.emotional.companionship.common.Result;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.stereotype.Component;
