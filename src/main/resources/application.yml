@@ -4,55 +4,62 @@ server:
     context-path: /ec
 
 spring:
-  main:
-    allow-bean-definition-overriding: true
+  application:
+    name: ec-server
   datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/emotional_companionship?useUnicode=true&characterEncoding=utf-8&useSSL=false&allowPublicKeyRetrieval=true
+    url: jdbc:mysql://localhost:3306/ec_server?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai
     username: root
-    password: 123456
-  mvc:
-    pathmatch:
-      matching-strategy: ant_path_matcher
-  cache:
-    type: redis
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    hikari:
+      connection-timeout: 30000
+      idle-timeout: 600000
+      max-lifetime: 1800000
+      maximum-pool-size: 10
+      minimum-idle: 5
   redis:
     host: localhost
     port: 6379
     database: 0
-    timeout: 60000
-  security:
-    basic:
-      path: /swagger-ui.html
-      enabled: true
-    user:
-      name: admin
-      password: admin
-
-# Swagger 2.x 配置
-springfox:
-  documentation:
-    enabled: true
-    auto-startup: true
-    swagger:
-      v2:
-        path: /api-docs
-    swagger-ui:
-      enabled: true
+    timeout: 1000
+    lettuce:
+      pool:
+        max-active: 8
+        max-wait: -1
+        max-idle: 8
+        min-idle: 0
+  sql:
+    init:
+      mode: always
+      schema-locations: classpath:schema.sql
+      data-locations: classpath:data.sql
 
 mybatis:
   mapper-locations: classpath:mapper/*.xml
   type-aliases-package: com.emotional.companionship.entity
   configuration:
     map-underscore-to-camel-case: true
+    cache-enabled: true
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 
 jwt:
-  secret: emotional_companionship_secret_key_for_jwt_token_generation_and_validation
-  expiration: 86400000  # 24小时，单位：毫秒
+  secret: your-secret-key
+  expiration: 86400000  # 24小时
 
-management:
-  endpoints:
-    web:
-      exposure:
-        include: health,info
+swagger:
+  enabled: true
+  title: 情感陪伴App API
+  description: 情感陪伴App API接口文档
+  version: 1.0
+  base-package: com.emotional.companionship.controller
+
+wechat:
+  app-id: your-wechat-app-id
+  app-secret: your-wechat-app-secret
+
+logging:
+  level:
+    root: INFO
+    com.emotional.companionship: DEBUG
+  file:
+    name: logs/ec-server.log

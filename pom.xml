@@ -41,22 +41,22 @@
             <artifactId>spring-boot-starter-security</artifactId>
         </dependency>
         
-        <!-- JWT 依赖 - 更新为更安全的版本 -->
+        <!-- JWT 依赖 -->
         <dependency>
             <groupId>io.jsonwebtoken</groupId>
             <artifactId>jjwt-api</artifactId>
-            <version>${jwt.version}</version>
+            <version>0.11.5</version>
         </dependency>
         <dependency>
             <groupId>io.jsonwebtoken</groupId>
             <artifactId>jjwt-impl</artifactId>
-            <version>${jwt.version}</version>
+            <version>0.11.5</version>
             <scope>runtime</scope>
         </dependency>
         <dependency>
             <groupId>io.jsonwebtoken</groupId>
             <artifactId>jjwt-jackson</artifactId>
-            <version>${jwt.version}</version>
+            <version>0.11.5</version>
             <scope>runtime</scope>
         </dependency>
         
@@ -187,6 +187,12 @@
             <artifactId>junit-jupiter</artifactId>
             <version>${testcontainers.version}</version>
             <scope>test</scope>
+        </dependency>
+        
+        <!-- AspectJ 依赖 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-aop</artifactId>
         </dependency>
     </dependencies>
     

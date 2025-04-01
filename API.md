@@ -6,7 +6,7 @@
 
 ## 接口基础信息
 
-- **基础URL**: `https://api.emotionalcompanionship.com/v1`
+- **基础URL**: `https://api.emotionalcompanionship.com/ec`
 - **接口调用说明**: 除了特别标明的接口外，大部分接口需要用户登录后才能调用
 - **认证方式**: 需要认证的接口在请求头（headers）中添加 `Authorization: Bearer {token}` 来进行认证
 - **错误码说明**: 所有接口都可能返回以下错误码:
