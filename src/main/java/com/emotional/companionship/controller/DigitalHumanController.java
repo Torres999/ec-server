@@ -1,23 +1,33 @@
 package com.emotional.companionship.controller;
 
-import com.emotional.companionship.common.Result;
-import com.emotional.companionship.dto.request.CreateDigitalHumanRequest;
-import com.emotional.companionship.dto.DigitalHumanCreateDTO;
-import com.emotional.companionship.dto.DigitalHumanDTO;
-import com.emotional.companionship.dto.request.UpdateDigitalHumanRequest;
-import com.emotional.companionship.service.DigitalHumanService;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
-import lombok.extern.slf4j.Slf4j;
+import java.util.List;
+
+import javax.validation.Valid;
+
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-import javax.validation.Valid;
-import java.util.List;
+import com.emotional.companionship.common.Result;
+import com.emotional.companionship.dto.DigitalHumanCreateDTO;
+import com.emotional.companionship.dto.DigitalHumanDTO;
+import com.emotional.companionship.dto.request.CreateDigitalHumanRequest;
+import com.emotional.companionship.dto.request.UpdateDigitalHumanRequest;
+import com.emotional.companionship.service.DigitalHumanService;
+
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * 数字人控制器
@@ -25,14 +35,14 @@ import java.util.List;
 @Slf4j
 @RestController
 @RequestMapping("/digital-humans")
-@Api(tags = "数字人管理")
+@Tag(name = "数字人管理")
 public class DigitalHumanController {
 
     @Autowired
     private DigitalHumanService digitalHumanService;
 
     @GetMapping
-    @ApiOperation("获取数字人列表")
+    @Operation(summary = "获取数字人列表")
     public Result<List<DigitalHumanDTO>> getDigitalHumans() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String userId = authentication.getName();
@@ -41,9 +51,9 @@ public class DigitalHumanController {
     }
 
     @GetMapping("/{id}")
-    @ApiOperation("获取数字人详情")
+    @Operation(summary = "获取数字人详情")
     public Result<DigitalHumanDTO> getDigitalHumanDetail(
-            @ApiParam(value = "数字人ID", required = true) @PathVariable String id) {
+            @Parameter(description = "数字人ID", required = true) @PathVariable String id) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String userId = authentication.getName();
         DigitalHumanDTO digitalHuman = digitalHumanService.getDigitalHumanDetail(id, userId);
@@ -51,9 +61,9 @@ public class DigitalHumanController {
     }
 
     @PostMapping
-    @ApiOperation("创建数字人")
+    @Operation(summary = "创建数字人")
     public Result<DigitalHumanDTO> createDigitalHuman(
-            @ApiParam(value = "创建数字人请求", required = true) @Valid @RequestBody CreateDigitalHumanRequest request) {
+            @Parameter(description = "创建数字人请求", required = true) @Valid @RequestBody CreateDigitalHumanRequest request) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String userId = authentication.getName();
 
@@ -66,10 +76,10 @@ public class DigitalHumanController {
     }
 
     @PutMapping("/{id}")
-    @ApiOperation("更新数字人信息")
+    @Operation(summary = "更新数字人信息")
     public Result<DigitalHumanDTO> updateDigitalHuman(
-            @ApiParam(value = "数字人ID", required = true) @PathVariable String id,
-            @ApiParam(value = "更新数字人请求", required = true) @Valid @RequestBody UpdateDigitalHumanRequest request) {
+            @Parameter(description = "数字人ID", required = true) @PathVariable String id,
+            @Parameter(description = "更新数字人请求", required = true) @Valid @RequestBody UpdateDigitalHumanRequest request) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String userId = authentication.getName();
 
@@ -82,9 +92,9 @@ public class DigitalHumanController {
     }
 
     @DeleteMapping("/{id}")
-    @ApiOperation("删除数字人")
+    @Operation(summary = "删除数字人")
     public Result<String> deleteDigitalHuman(
-            @ApiParam(value = "数字人ID", required = true) @PathVariable String id) {
+            @Parameter(description = "数字人ID", required = true) @PathVariable String id) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String userId = authentication.getName();
         boolean success = digitalHumanService.deleteDigitalHuman(id, userId);

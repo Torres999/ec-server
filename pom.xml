@@ -18,9 +18,7 @@
         <java.version>1.8</java.version>
         <mysql.version>8.0.33</mysql.version>
         <mybatis.version>2.3.2</mybatis.version>
-        <swagger.version>2.9.2</swagger.version>
-        <swagger-annotations.version>1.5.21</swagger-annotations.version>
-        <swagger-models.version>1.5.21</swagger-models.version>
+        <springdoc.version>1.7.0</springdoc.version>
         <protobuf.version>3.25.5</protobuf.version>
         <jwt.version>0.11.5</jwt.version>
         <h2.version>2.2.224</h2.version>
@@ -99,28 +97,16 @@
             <scope>runtime</scope>
         </dependency>
         
-        <!-- Swagger 2.x 依赖 - 与Spring Boot 2.7.18兼容的版本 -->
+        <!-- SpringDoc OpenAPI 3 -->
         <dependency>
-            <groupId>io.springfox</groupId>
-            <artifactId>springfox-swagger2</artifactId>
-            <version>${swagger.version}</version>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-ui</artifactId>
+            <version>${springdoc.version}</version>
         </dependency>
         <dependency>
-            <groupId>io.springfox</groupId>
-            <artifactId>springfox-swagger-ui</artifactId>
-            <version>${swagger.version}</version>
-        </dependency>
-        
-        <!-- Swagger 注解和模型 -->
-        <dependency>
-            <groupId>io.swagger</groupId>
-            <artifactId>swagger-annotations</artifactId>
-            <version>${swagger-annotations.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>io.swagger</groupId>
-            <artifactId>swagger-models</artifactId>
-            <version>${swagger-models.version}</version>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-security</artifactId>
+            <version>${springdoc.version}</version>
         </dependency>
         
         <!-- Protocol Buffers 依赖 -->

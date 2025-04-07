@@ -51,6 +51,19 @@ swagger:
   version: 1.0
   base-package: com.emotional.companionship.controller
 
+# SpringDoc OpenAPI 配置
+springdoc:
+  api-docs:
+    enabled: true
+    path: /v3/api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+    tags-sorter: alpha
+    operations-sorter: alpha
+  packages-to-scan: com.emotional.companionship.controller
+  default-consumes-media-type: application/json
+  default-produces-media-type: application/json
+
 wechat:
   app-id: your-wechat-app-id
   app-secret: your-wechat-app-secret

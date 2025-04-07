@@ -1,11 +1,5 @@
 package com.emotional.companionship.controller;
 
-import com.emotional.companionship.common.Result;
-import com.emotional.companionship.dto.UserDTO;
-import com.emotional.companionship.dto.UserDetailDTO;
-import com.emotional.companionship.service.UserService;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -13,12 +7,20 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.emotional.companionship.common.Result;
+import com.emotional.companionship.dto.UserDTO;
+import com.emotional.companionship.dto.UserDetailDTO;
+import com.emotional.companionship.service.UserService;
+
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+
 /**
  * 用户控制器
  */
 @RestController
 @RequestMapping("/user")
-@Api(tags = "用户接口")
+@Tag(name = "用户接口")
 public class UserController {
 
     @Autowired
@@ -28,7 +30,7 @@ public class UserController {
      * 获取用户信息
      */
     @GetMapping("/profile")
-    @ApiOperation("获取当前登录用户的基本信息")
+    @Operation(summary = "获取当前登录用户的基本信息")
     public Result<UserDTO> getUserProfile() {
         try {
             Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -49,7 +51,7 @@ public class UserController {
      * 获取用户详细信息
      */
     @GetMapping("/details")
-    @ApiOperation("获取当前登录用户的详细信息")
+    @Operation(summary = "获取当前登录用户的详细信息")
     public Result<UserDetailDTO> getUserDetails() {
         try {
             Authentication authentication = SecurityContextHolder.getContext().getAuthentication();

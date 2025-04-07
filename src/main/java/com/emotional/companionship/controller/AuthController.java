@@ -1,25 +1,31 @@
 package com.emotional.companionship.controller;
 
-import com.emotional.companionship.dto.request.LoginResponseDTO;
-import com.emotional.companionship.common.Result;
-import com.emotional.companionship.service.UserService;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
-import java.util.HashMap;
-import java.util.Map;
+import com.emotional.companionship.common.Result;
+import com.emotional.companionship.dto.request.LoginResponseDTO;
+import com.emotional.companionship.service.UserService;
+
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.tags.Tag;
 
 /**
  * 认证控制器
  */
 @RestController
 @RequestMapping("/auth")
-@Api(tags = "认证接口")
+@Tag(name = "认证接口")
 public class AuthController {
 
     @Autowired
@@ -29,9 +35,9 @@ public class AuthController {
      * 微信登录
      */
     @PostMapping("/login/wechat")
-    @ApiOperation("微信登录")
+    @Operation(summary = "微信登录")
     public Result<LoginResponseDTO> wxLogin(
-            @ApiParam(value = "微信授权返回的临时票据", required = true)
+            @Parameter(description = "微信授权返回的临时票据", required = true)
             @RequestParam String code) {
         try {
             LoginResponseDTO loginResponse = userService.wxLogin(code);
@@ -45,7 +51,7 @@ public class AuthController {
      * 检查登录状态
      */
     @GetMapping("/check")
-    @ApiOperation("检查登录状态")
+    @Operation(summary = "检查登录状态")
     public Result<Map<String, Object>> checkLoginStatus() {
         try {
             Authentication authentication = SecurityContextHolder.getContext().getAuthentication();

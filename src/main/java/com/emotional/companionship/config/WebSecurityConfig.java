@@ -1,6 +1,5 @@
 package com.emotional.companionship.config;
 
-import com.emotional.companionship.security.JwtAuthenticationFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -13,6 +12,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+
+import com.emotional.companionship.security.JwtAuthenticationFilter;
 
 /**
  * Web安全配置
@@ -31,15 +32,14 @@ public class WebSecurityConfig {
             .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
             .and()
             .authorizeRequests()
-            // 允许Swagger相关路径的访问
+            // 允许OpenAPI相关路径的访问
             .antMatchers(
                 "/swagger-ui.html",
                 "/swagger-ui/**",
-                "/swagger-resources/**",
-                "/v2/api-docs/**",
                 "/v3/api-docs/**",
+                "/api-docs/**",
+                "/swagger-resources/**",
                 "/webjars/**",
-                "/doc.html",
                 "/favicon.ico"
             ).permitAll()
             // 允许认证相关的接口访问
